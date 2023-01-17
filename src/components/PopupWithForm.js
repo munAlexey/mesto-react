@@ -3,12 +3,12 @@ import closeBtn from '../img/close-btn.svg';
 import closeBtnFull from '../img/768/close-btn.svg';
 
 function PopupWithForm(props) {
-  const {children, title, name, isOpen, onClose} = props;
+  const {children, title, name, isOpen, onClose, button} = props;
   
   return (
     <div className={`pop-up pop-up_${name} ${ isOpen ? 'action_open pop-up_opened' : '' }`}>
         <div className="pop-up__block">
-          <button type="button" className="pop-up__close-btn">
+          <button type="button" className="pop-up__close-btn" onClick={onClose}>
             <picture>
               <source 
                 srcSet={closeBtnFull}
@@ -21,7 +21,7 @@ function PopupWithForm(props) {
           </h2>
           <form className={`pop-up__form pop-up__form-${name}`} name={`form-${name}`} noValidate>
             {children}
-            <button type="submit" className={`pop-up__button pop-up__${name}-btn`}>Сохранить</button>
+            <button type="submit" className={`pop-up__button pop-up__${name}-btn`}>{button}</button>
           </form>
         </div>
       </div>
