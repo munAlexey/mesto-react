@@ -3,6 +3,7 @@ import BusketDeleteBtn from '../img/delete.svg';
 
 export default function Card(props) {
 
+  console.log(props)
   function handleClick() {
     props.onCardClick(props.card);
   }  
@@ -24,9 +25,8 @@ export default function Card(props) {
       <div className="card__text-block">
         <h3 className="card__title">{props.name}</h3>
         <div className="card__like">
-          <button type="button" className="card__like-btn">
-          </button>
-          <span className="card__like-count">0</span>
+          <button type="button" className="card__like-btn" />
+          <span className="card__like-count">{props.card.likes.length}</span>
         </div>
       </div>
     </li>

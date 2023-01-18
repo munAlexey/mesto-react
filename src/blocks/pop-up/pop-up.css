@@ -3,7 +3,7 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  background-color: rgba(00, 00, 00, .9);
+  background-color: rgba(00, 00, 00, .5);
   position: fixed;
   visibility: hidden;
   flex-direction: column;

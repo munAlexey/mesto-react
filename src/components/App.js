@@ -7,6 +7,12 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
 function App() {
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
+  const [cardInfo, setCardInfo] = React.useState(false);
+
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true)
   }
@@ -16,28 +22,20 @@ function App() {
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
-
   function handleCardClick(cardInfo) {
-    setSelectedCard(true);
-    setCardInfo({
+    setCardInfo(true);
+    setSelectedCard({
       name: cardInfo.name,
       link: cardInfo.link
     })
-    console.log(cardInfo)
   }
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false)
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard(false);
+    setCardInfo(false);
   }
-
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(false);
-  const [cardInfo, setCardInfo] = React.useState({})
 
   return (
     <div className="App">
@@ -121,7 +119,7 @@ function App() {
           </label>
         </PopupWithForm>
         <PopupWithForm  title="Вы уверены?" button="Да" />
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} cardInfo={cardInfo} />  
+        <ImagePopup card={cardInfo} onClose={closeAllPopups} cardInfo={selectedCard} />  
       </div>
     </div>
   );

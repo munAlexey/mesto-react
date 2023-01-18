@@ -64,6 +64,7 @@
 /* pop-up */
 
 @import url('./blocks/pop-up/pop-up.css');
+@import url('./blocks/pop-up/_cards/pop-up_cards.css');
 @import url('./blocks/pop-up/__button/pop-up__button.css');
 @import url('./blocks/pop-up/__confirm-btn/pop-up__confirm-btn.css');
 @import url('./blocks/pop-up/__button/_disabled/pop-up__button_disabled.css');
