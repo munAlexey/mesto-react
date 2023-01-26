@@ -64,7 +64,7 @@ class API {
       'headers': this.headers,
       body: JSON.stringify({
         name: profileUserInfo.name,
-        about: profileUserInfo.profession
+        about: profileUserInfo.about
       })
     })
     if (response.ok) {
@@ -79,9 +79,7 @@ class API {
     const response = await fetch(`${this.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       'headers': this.headers,
-      body: JSON.stringify({
-        avatar: profileUserAva.link,
-      })
+      body: JSON.stringify(profileUserAva)
     })
     if (response.ok) {
       const data = await response.json();
@@ -96,7 +94,7 @@ class API {
       method: 'POST',
       'headers': this.headers,
       body: JSON.stringify({
-        name: inputs.title,
+        name: inputs.name,
         link: inputs.link,
       })
     })
