@@ -1,24 +1,33 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
+import { CurrentCardContext } from "../context/CurrentUserContext";
 
 function AddPlacePopup(props) {
   const { isOpen, onClose } = props;
-  const inputNameRef = React.useRef();
-  const inputLinkRef = React.useRef();
+  const [name, setName] = React.useState("");
+  const [link, setLink] = React.useState("");
+  const currentCard = React.useContext(CurrentCardContext);
 
   function handleSubmit(e) {
     e.preventDefault();
 
     props.onAddPlace({
-      name: inputNameRef.current.value,
-      link: inputLinkRef.current.value,
+      name,
+      link,
     });
+  }
+  function handleChangeName(evt) {
+    setName(evt.target.value);
+  }
+
+  function handleChangeLink(evt) {
+    setLink(evt.target.value);
   }
 
   React.useEffect(() => {
-    inputNameRef.current.value = "";
-    inputLinkRef.current.value = "";
-  }, [isOpen]);
+    setName(currentCard?.name ?? "");
+    setLink(currentCard?.about ?? "");
+  }, [currentCard, isOpen]);
   return (
     <PopupWithForm
       onSubmit={handleSubmit}
@@ -30,7 +39,8 @@ function AddPlacePopup(props) {
     >
       <label className="pop-up__form-label">
         <input
-          ref={inputNameRef}
+          onChange={handleChangeName}
+          value={name}
           type="text"
           className="pop-up__input"
           name="title"
@@ -44,7 +54,8 @@ function AddPlacePopup(props) {
       </label>
       <label className="pop-up__form-label">
         <input
-          ref={inputLinkRef}
+          onChange={handleChangeLink}
+          value={link}
           type="url"
           className="pop-up__input"
           name="link"
