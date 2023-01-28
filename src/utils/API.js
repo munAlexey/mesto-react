@@ -1,4 +1,4 @@
-import apiConfig from './constants.js';
+import apiConfig from "./constants.js";
 
 class API {
   constructor(config) {
@@ -6,117 +6,85 @@ class API {
     this.headers = config.headers;
   }
 
-  async getCardsList() {
-    const response = await fetch(`${this.baseUrl}/cards`, {
-      method: 'GET',
-      'headers': this.headers
-    })
+  _checkResponse(response) {
     if (response.ok) {
-      const data = await response.json();
-      return data;
+      return response.json();
     } else {
       return Promise.reject(`Ошибка: ${response.status}`);
     }
+  }
+
+  async getCardsList() {
+    const response = await fetch(`${this.baseUrl}/cards`, {
+      method: "GET",
+      headers: this.headers,
+    });
+    return this._checkResponse(response);
   }
 
   async getCardLike(id) {
     const response = await fetch(`${this.baseUrl}/cards/${id}/likes`, {
-      method: 'PUT',
-      'headers': this.headers,
+      method: "PUT",
+      headers: this.headers,
     });
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
+    return this._checkResponse(response);
   }
 
   async deleteLike(id) {
-    const response = await fetch(`${this.baseUrl}/cards/${id}/likes`,{
-      method: 'DELETE',
-      headers: this.headers
-    })
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
+    const response = await fetch(`${this.baseUrl}/cards/${id}/likes`, {
+      method: "DELETE",
+      headers: this.headers,
+    });
+    return this._checkResponse(response);
   }
 
   async getProfileInfo() {
     const response = await fetch(`${this.baseUrl}/users/me`, {
-      method: 'GET',
-      'headers': this.headers
-      }) 
-      if (response.ok) {
-        const data = await response.json();
-        return data;
-      } else {
-        return Promise.reject(`Ошибка: ${response.status}`);
-      }
+      method: "GET",
+      headers: this.headers,
+    });
+    return this._checkResponse(response);
   }
 
   async editProfileInfo(profileUserInfo) {
     const response = await fetch(`${this.baseUrl}/users/me`, {
-      method: 'PATCH',
-      'headers': this.headers,
+      method: "PATCH",
+      headers: this.headers,
       body: JSON.stringify({
         name: profileUserInfo.name,
-        about: profileUserInfo.about
-      })
-    })
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
+        about: profileUserInfo.about,
+      }),
+    });
+    return this._checkResponse(response);
   }
 
   async editProfileAvatar(profileUserAva) {
     const response = await fetch(`${this.baseUrl}/users/me/avatar`, {
-      method: 'PATCH',
-      'headers': this.headers,
-      body: JSON.stringify(profileUserAva)
-    })
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify(profileUserAva),
+    });
+    return this._checkResponse(response);
   }
 
   async createCard(inputs) {
     const response = await fetch(`${this.baseUrl}/cards`, {
-      method: 'POST',
-      'headers': this.headers,
+      method: "POST",
+      headers: this.headers,
       body: JSON.stringify({
         name: inputs.name,
         link: inputs.link,
-      })
-    })
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
+      }),
+    });
+    return this._checkResponse(response);
   }
 
   async deleteCard(id) {
-    const response = await fetch(`${this.baseUrl}/cards/${id}`,{
-      method: 'DELETE',
-      headers: this.headers
-    })
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
+    const response = await fetch(`${this.baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: this.headers,
+    });
+    return this._checkResponse(response);
   }
 }
 
