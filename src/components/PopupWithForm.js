@@ -8,7 +8,7 @@ function PopupWithForm(props) {
   return (
     <div
       className={`pop-up pop-up_${name} ${
-        isOpen ? "action_open pop-up_opened" : "action_close"
+        isOpen ? "action_open pop-up_opened" : ""
       }`}
     >
       <div className="pop-up__block">
